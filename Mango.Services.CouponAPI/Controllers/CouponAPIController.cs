@@ -20,6 +20,13 @@ namespace Mango.Services.CouponAPI.Controllers
             _response = new ResponseDto();
             _mapper = mapper;
         }
+        /// <summary>
+        /// Retrieves all coupons from the database.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="ResponseDto"/> containing a list of <see cref="CouponDto"/> objects if successful; 
+        /// otherwise, an error message and <c>IsSuccess</c> set to <c>false</c>.
+        /// </returns>
         [HttpGet]
         public ResponseDto Get()
         {
@@ -35,6 +42,7 @@ namespace Mango.Services.CouponAPI.Controllers
             }
             return _response;
         }
+
         [HttpGet]
         [Route("{id:int}")]
         public ResponseDto Get(int id)
