@@ -79,6 +79,16 @@ namespace Mango.Services.CouponAPI.Controllers
             }
             return _response;
         }
+        /// <summary>
+        /// Creates a new coupon in the database.
+        /// </summary>
+        /// <param name="couponDto">
+        /// The <see cref="CouponDto"/> object containing the details of the coupon to create.
+        /// </param>
+        /// <returns>
+        /// A <see cref="ResponseDto"/> containing the created <see cref="CouponDto"/> if successful;
+        /// otherwise, an error message and <c>IsSuccess</c> set to <c>false</c>.
+        /// </returns>
         [HttpPost]
         public ResponseDto Post([FromBody] CouponDto couponDto)
         {
@@ -96,6 +106,16 @@ namespace Mango.Services.CouponAPI.Controllers
             }
             return _response;
         }
+        /// <summary>
+        /// Updates an existing coupon in the database.
+        /// </summary>
+        /// <param name="couponDto">
+        /// The <see cref="CouponDto"/> object containing the updated details of the coupon.
+        /// </param>
+        /// <returns>
+        /// A <see cref="ResponseDto"/> containing the updated <see cref="CouponDto"/> if successful;
+        /// otherwise, an error message and <c>IsSuccess</c> set to <c>false</c>.
+        /// </returns>
         [HttpPut]
         public ResponseDto Put([FromBody] CouponDto couponDto)
         {
@@ -113,6 +133,16 @@ namespace Mango.Services.CouponAPI.Controllers
             }
             return _response;
         }
+        /// <summary>
+        /// Deletes a coupon from the database by its unique identifier.
+        /// </summary>
+        /// <param name="id">
+        /// The unique identifier of the coupon to delete.
+        /// </param>
+        /// <returns>
+        /// A <see cref="ResponseDto"/> indicating whether the deletion was successful. 
+        /// If an error occurs, <c>IsSuccess</c> is set to <c>false</c> and <c>Message</c> contains the error details.
+        /// </returns>
         [HttpDelete]
         public ResponseDto Delete(int id)
         {
