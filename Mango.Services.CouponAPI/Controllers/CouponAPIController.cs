@@ -144,6 +144,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// If an error occurs, <c>IsSuccess</c> is set to <c>false</c> and <c>Message</c> contains the error details.
         /// </returns>
         [HttpDelete]
+        [Route("{id:int}")]
         public ResponseDto Delete(int id)
         {
             try
