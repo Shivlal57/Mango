@@ -2,6 +2,7 @@
 using Mango.Services.CouponAPI.Data;
 using Mango.Services.CouponAPI.Models;
 using Mango.Services.CouponAPI.Models.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace Mango.Services.CouponAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CouponAPIController : ControllerBase
     {
         private readonly AppDbContext _db;
@@ -90,6 +92,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// otherwise, an error message and <c>IsSuccess</c> set to <c>false</c>.
         /// </returns>
         [HttpPost]
+        [Authorize(Roles = "ADMIN")]
         public ResponseDto Post([FromBody] CouponDto couponDto)
         {
             try
@@ -117,6 +120,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// otherwise, an error message and <c>IsSuccess</c> set to <c>false</c>.
         /// </returns>
         [HttpPut]
+        [Authorize(Roles = "ADMIN")]
         public ResponseDto Put([FromBody] CouponDto couponDto)
         {
             try
@@ -145,6 +149,7 @@ namespace Mango.Services.CouponAPI.Controllers
         /// </returns>
         [HttpDelete]
         [Route("{id:int}")]
+        [Authorize(Roles = "ADMIN")]
         public ResponseDto Delete(int id)
         {
             try
