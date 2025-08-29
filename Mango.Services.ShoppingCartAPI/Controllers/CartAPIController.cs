@@ -10,6 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mango.Services.ShoppingCartAPI.Controllers
 {
+    /// <summary>
+    /// API controller for managing shopping cart operations.
+    /// </summary>
     [Route("api/cart")]
     [ApiController]
     public class CartAPIController : ControllerBase
@@ -19,6 +22,14 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
         private readonly AppDbContext _db;
         private readonly IProductService _productService;
         private readonly ICouponService _couponService;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CartAPIController"/> class.
+        /// </summary>
+        /// <param name="mapper">The AutoMapper instance.</param>
+        /// <param name="db">The application database context.</param>
+        /// <param name="productService">The product service.</param>
+        /// <param name="couponService">The coupon service.</param>
         public CartAPIController(IMapper mapper, AppDbContext db, IProductService productService, ICouponService couponService)
         {
             _mapper = mapper;
@@ -28,6 +39,11 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
             _couponService = couponService;
         }
 
+        /// <summary>
+        /// Retrieves the cart for a specific user.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>A <see cref="ResponseDto"/> containing the cart information.</returns>
         [HttpGet("GetCart/{userId}")]
         public async Task<ResponseDto> GetCart(string userId)
         {
@@ -82,6 +98,11 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Applies a coupon code to the user's cart.
+        /// </summary>
+        /// <param name="cartDto">The cart data transfer object containing the coupon code and user information.</param>
+        /// <returns>A <see cref="ResponseDto"/> indicating the result of the operation.</returns>
         [HttpPost("ApplyCoupon")]
         public async Task<ResponseDto> ApplyCoupon([FromBody] CartDto cartDto)
         {
@@ -100,6 +121,12 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
             }
             return _response;
         }
+
+        /// <summary>
+        /// Removes the coupon code from the user's cart.
+        /// </summary>
+        /// <param name="cartDto">The cart data transfer object containing the user information.</param>
+        /// <returns>A <see cref="ResponseDto"/> indicating the result of the operation.</returns>
         [HttpPost("RemoveCoupon")]
         public async Task<ResponseDto> RemoveCoupon([FromBody] CartDto cartDto)
         {
@@ -119,6 +146,11 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
             return _response;
         }
 
+        /// <summary>
+        /// Inserts or updates the cart for a user.
+        /// </summary>
+        /// <param name="cartDto">The cart data transfer object containing cart header and details.</param>
+        /// <returns>A <see cref="ResponseDto"/> containing the updated cart information.</returns>
         [HttpPost("CartUpsert")]
         public async Task<ResponseDto> CartUpsert(CartDto cartDto)
         {
@@ -172,6 +204,7 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
             }
             return _response;
         }
+
         /// <summary>
         /// Removes a cart item by its CartDetailsId. If it is the last item in the cart, also removes the cart header.
         /// </summary>
@@ -193,7 +226,6 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                     _db.CartHeaders.Remove(cartHeaderToRemove);
                 }
                 await _db.SaveChangesAsync();
-
 
                 _response.Result = true;
             }
