@@ -172,6 +172,11 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
             }
             return _response;
         }
+        /// <summary>
+        /// Removes a cart item by its CartDetailsId. If it is the last item in the cart, also removes the cart header.
+        /// </summary>
+        /// <param name="cartDetailsId">The identifier of the cart details to remove.</param>
+        /// <returns>A <see cref="ResponseDto"/> indicating the result of the operation.</returns>
         [HttpPost("RemoveCart")]
         public async Task<ResponseDto> RemoveCart([FromBody] int cartDetailsId)
         {
