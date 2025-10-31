@@ -1,8 +1,9 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Models.Dto;
+using Mango.Web.Service.IService;
 using Mango.Web.Utility;
 
-namespace Mango.Web.Service.IService
+namespace Mango.Web.Service
 {
     public class ProductService : IProductService
     {
